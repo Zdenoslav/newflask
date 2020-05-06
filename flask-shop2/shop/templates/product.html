@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1> {{ product.title }} </h1>
+<div class="product-container">
+ <img class="product-img" src="{{ url_for('static', filename='img/' + product.image_file) }}">
+    <div class="product-desc">
+        <p id="lol"> {{ product.price}}<p style="font-size: 20px;">
+         <p> {{ product.description }}</p>
+    </div>
+</div>
+<div class="product-btn">
+    <a href="/add_to_cart/{{product.id}}">Add to Cart</a>
+</div>
+    <!--bootstrap.min.js-->
+    <script src="{{url_for('static', filename='assets/js/bootstrap.min.js')}}"></script>
+{% endblock content %}

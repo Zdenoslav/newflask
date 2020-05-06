@@ -1,0 +1,59 @@
+{% extends "layout.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Basket</title>
+</head>
+
+<body>
+    <main>
+
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th scope="col">Item</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Quantity</th>
+                    <th scope="col">Subtotal</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for key, value in display_cart.items() %}
+                <tr>
+                    <td>{{ value["title"] }}</td>
+                    <td>{{ value["price"] }}</td>
+                    <td>{{ value["quantity"]}} </td>
+                    <td>{{ (value["quantity"] * value["price"]) }}</td>
+                    <td>
+                        <div class="remove">
+                            <form action="{{ url_for('delete_product', product_id=key|int) }}" method="POST">
+                                <input class="" type="submit" value="Delete">
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td>Total</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>£{{ total }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </main>
+    <a href="/checkout" class="btn-cart welcome-add-cart">Procced to checkout</a>
+</body>
+
+</html>
+
+<script src="{{url_for('static', filename='assets/js/jquery.js')}}"></script>
+
+{% endblock content %}
